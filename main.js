@@ -3,6 +3,12 @@ var ws;
 var url;
 var isAuthenticated = false;
 
+// Helper function to make a two digit number
+function td(n)
+{
+    return n < 10 ? '0' + n : n;
+}
+
 // Creates a log entry on the web page
 function createLog(verbosity, timestamp, category, msg)
 {
@@ -40,7 +46,7 @@ function onWebSocketClose()
     if (isAuthenticated)
     {
         var date = new Date();
-        var timestamp = date.getUTCFullYear() + "." + date.getUTCMonth() + "." + date.getUTCDate() + "-" + date.getUTCHours() + "." + date.getUTCMinutes() + "." + date.getUTCSeconds();
+        var timestamp = td(date.getUTCFullYear()) + "." + td(date.getUTCMonth() + 1) + "." + td(date.getUTCDate()) + "-" + td(date.getUTCHours()) + "." + td(date.getUTCMinutes()) + "." + td(date.getUTCSeconds());
         createLog("system", timestamp, "System", "WebSocket connection closed.");
         
         document.getElementById("connection-label").innerHTML = "Not " + document.getElementById("connection-label").innerHTML + " (please disconnect)";
