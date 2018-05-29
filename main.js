@@ -159,7 +159,7 @@ function disconnect()
 {
     ws.close();
     setTimeout(function() {
-        window.location.reload();
+        //window.location.reload();
     }, 200);
 }
 
