@@ -51,6 +51,8 @@ function onWebSocketClose()
 function onWebSocketError(e)
 {
     console.error("WebSocket error: " + e);
+
+    document.getElementById("webSocketError").style.display = "block";
 }
 
 function onWebSocketMessage(e)
@@ -124,18 +126,21 @@ function connect()
 {
     url = document.getElementById("ipAddressInput").value;
 
-    if (!url.startsWith("ws://") && !url.startsWith("wss://"))
+    if (url != "")
     {
-        url = "ws://" + url;
+        if (!url.startsWith("ws://") && !url.startsWith("wss://"))
+        {
+            url = "ws://" + url;
+        }
+
+        console.log("Connecting to " + url);
+
+        ws = new WebSocket(url);
+        ws.onclose = onWebSocketClose;
+        ws.onerror = onWebSocketError;
+        ws.onmessage = onWebSocketMessage;
+        ws.onopen = onWebSocketOpen;
     }
-
-    console.log("Connecting to " + url);
-
-    ws = new WebSocket(url);
-    ws.onclose = onWebSocketClose;
-    ws.onerror = onWebSocketError;
-    ws.onmessage = onWebSocketMessage;
-    ws.onopen = onWebSocketOpen;
 }
 
 function disconnect()

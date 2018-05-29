@@ -45,6 +45,9 @@
                     <div class="alert alert-dismissible alert-danger" id="passwordIncorrectError">
                             <strong>Error!</strong> The password you entered was incorrect!
                     </div>
+                    <div class="alert alert-dismissible alert-danger" id="webSocketError">
+                        <strong>Error!</strong> There was an error connecting to your WebConsole. Is the IP correct?
+                    </div>
                 </fieldset>
             </form>
         </div>
@@ -67,6 +70,7 @@
     <script>
         document.getElementById("log-container").style.display = "none";
         document.getElementById("passwordIncorrectError").style.display = "none";
+        document.getElementById("webSocketError").style.display = "none";
     </script>
 
 </body>
