@@ -183,3 +183,21 @@ code:last-child {
 .alert {
   margin-top: 10px;
 }
+
+.bottom-bar {
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+}
+
+.copyright-label {
+  margin: 0;
+  font-size: 12pt;
+}
+
+.check-it-out {
+  margin: 0;
+  text-align: right;
+  flex: 1;
+  font-size: 12pt;
+}
