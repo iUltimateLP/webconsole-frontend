@@ -43,8 +43,8 @@ function onWebSocketClose()
         var timestamp = date.getUTCFullYear() + "." + date.getUTCMonth() + "." + date.getUTCDate() + "-" + date.getUTCHours() + "." + date.getUTCMinutes() + "." + date.getUTCSeconds();
         createLog("system", timestamp, "System", "WebSocket connection closed.");
         
-        document.getElementById("connection-label").style.color = "#EC5f67";
-        document.getElementById("connection-label").innerHTML = "Not " + document.getElementById("connection-label").innerHTML;
+        document.getElementById("connection-label").innerHTML = "Not " + document.getElementById("connection-label").innerHTML + " (please disconnect)";
+        document.getElementById("connection-label").setAttribute("style", "color: #EC5F67 !important");
     }
 }
 
