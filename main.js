@@ -38,6 +38,13 @@ function createLog(verbosity, timestamp, category, msg)
     }  
 }
 
+function createSystemLog(message)
+{
+    var date = new Date();
+    var timestamp = td(date.getUTCFullYear()) + "." + td(date.getUTCMonth() + 1) + "." + td(date.getUTCDate()) + "-" + td(date.getUTCHours()) + "." + td(date.getUTCMinutes()) + "." + td(date.getUTCSeconds());
+    createLog("system", timestamp, "System", message);
+}
+
 // WebSocket callbacks
 function onWebSocketClose()
 {
@@ -45,10 +52,7 @@ function onWebSocketClose()
 
     if (isAuthenticated)
     {
-        var date = new Date();
-        var timestamp = td(date.getUTCFullYear()) + "." + td(date.getUTCMonth() + 1) + "." + td(date.getUTCDate()) + "-" + td(date.getUTCHours()) + "." + td(date.getUTCMinutes()) + "." + td(date.getUTCSeconds());
-        createLog("system", timestamp, "System", "WebSocket connection closed.");
-        
+        createSystemLog("WebConsole connection closed.");
         document.getElementById("connection-label").innerHTML = "Not " + document.getElementById("connection-label").innerHTML + " (please disconnect)";
         document.getElementById("connection-label").setAttribute("style", "color: #EC5F67 !important");
     }
@@ -100,6 +104,8 @@ function onWebSocketMessage(e)
             document.getElementById("log-container").style.display = "block";
 
             isAuthenticated = true;
+
+            createSystemLog("WebConsole connection opened");
 
             // Request all logs
             var command = {"cmd": "REQUEST_ALL_LOGS"};
