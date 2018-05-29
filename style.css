@@ -1,3 +1,8 @@
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
 :root {
   --log-color-info: #f9f9f9;
   --log-color-warn: #f99157;
@@ -36,7 +41,7 @@ ul {
     background: rgba(#FFF,0.9);
     background: linear-gradient(top left, #eee, #ddd);
     background-repeat: no-repeat;
-    max-height: 800px;
+    max-height: 78vh;
     overflow-x: auto;
 }
 
