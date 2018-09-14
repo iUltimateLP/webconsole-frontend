@@ -108,8 +108,10 @@ function onWebSocketMessage(e)
             createSystemLog("WebConsole connection opened");
 
             // Request all logs
-            var command = {"cmd": "REQUEST_ALL_LOGS"};
-            ws.send(JSON.stringify(command));
+			if (window.localStorage.getItem('getAllLogsOnStartupChecked') == 'true') {
+				var command = {"cmd": "REQUEST_ALL_LOGS"};
+				ws.send(JSON.stringify(command));
+			}
         }
         else if (obj.cmd == "AUTHENTICATION_ERROR")
         {
@@ -152,6 +154,9 @@ function connect()
         ws.onerror = onWebSocketError;
         ws.onmessage = onWebSocketMessage;
         ws.onopen = onWebSocketOpen;
+		
+		window.localStorage.setItem("lastURL", url);
+		window.localStorage.setItem("lastPassword", document.getElementById("passwordInput").value);
     }
 }
 
@@ -159,7 +164,7 @@ function disconnect()
 {
     ws.close();
     setTimeout(function() {
-        //window.location.reload();
+        window.location.reload();
     }, 200);
 }
 
@@ -178,4 +183,14 @@ function onAutoScrollCheck()
 
         list.scrollTo(0, list.scrollHeight);
     }
+}
+
+function onRememberLoginChecked()
+{
+	window.localStorage.setItem("rememberLoginChecked", document.getElementById("rememberLogin").checked);
+}
+
+function onGetAllLogsChecked()
+{
+	window.localStorage.setItem("getAllLogsOnStartupChecked", document.getElementById("getAllLogsOnStartup").checked);
 }

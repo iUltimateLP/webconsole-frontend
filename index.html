@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>WebConsole viewer</title>
+    <title>WebConsole</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
@@ -24,7 +24,7 @@
             <h1 class="display-3">Connect</h1>
             <p class="lead">Please connect with the Unreal instance running WebConsole</p>
             <hr/>
-            <form>
+            <form onsubmit="return false">
                 <fieldset>
                     <div class="form-group row" style="margin-left: 0px">
                         <div class="form-group">
@@ -40,6 +40,14 @@
                             <small id="passwordHelp" class="form-text text-muted">The WebConsole password you specified in your project settings</small>
                         </div>
                     </div>   
+					<div class="custom-control custom-checkbox">
+						<input type="checkbox" class="custom-control-input" id="rememberLogin" checked="" onchange="onRememberLoginChecked()">
+						<label class="custom-control-label" for="rememberLogin">Remember credentials</label>
+					</div>
+					<div class="custom-control custom-checkbox">
+						<input type="checkbox" class="custom-control-input" id="getAllLogsOnStartup" checked="" onchange="onGetAllLogsChecked()">
+						<label class="custom-control-label" for="getAllLogsOnStartup">Get all logs on startup</label>
+					</div>
                     <hr/>
                     <button type="submit" class="btn btn-primary" onclick="connect();">Connect</button>
                     <div class="alert alert-dismissible alert-danger" id="passwordIncorrectError">
@@ -50,6 +58,12 @@
                     </div>
                 </fieldset>
             </form>
+			<script>
+				document.getElementById("ipAddressInput").value = window.localStorage.getItem('lastURL');
+				document.getElementById("passwordInput").value = window.localStorage.getItem('lastPassword');
+				document.getElementById("rememberLogin").checked = (window.localStorage.getItem('rememberLoginChecked') == 'true');
+				document.getElementById("getAllLogsOnStartup").checked = (window.localStorage.getItem('getAllLogsOnStartupChecked') == 'true');
+			</script>
         </div>
 
         <div class="log-app" id="log-container">
